@@ -1,0 +1,34 @@
+﻿<Window x:Class="WPF_DatabaseConnection.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_DatabaseConnection"
+        mc:Ignorable="d"
+        Title="Werken met data" Height="450" Width="800">
+    <StackPanel>
+        <Label FontWeight="Bold">Categorieën</Label>
+        <ListBox Name="lbCategorieen" SelectionChanged="lbCategorieen_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding Path=Naam}"/>
+                        <Label Grid.Column="1"  Content="{Binding Path=Omschrijving}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Horizontal">
+            <Label FontWeight="Bold">Huidige categorie: </Label>
+            <TextBox Name="tbCategorie" Width="100" LostFocus="tbCategorie_LostFocus" />
+        </StackPanel>
+        <StackPanel Name="spOmschrijving" Visibility="Hidden">
+            <Label FontWeight="Bold" Content="Omschrijving nieuwe categorie: "/>
+            <TextBox Name="tbOmschrijving" Width="250" LostFocus="tbOmschrijving_LostFocus"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
