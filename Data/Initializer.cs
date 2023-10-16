@@ -21,6 +21,14 @@ namespace WPF_DatabaseConnection.Data
                 context.Add(new Categorie { Naam = "IT", Omschrijving = "IT-toestellen" });
                 context.SaveChanges();
             }
+
+            Categorie dummyCategorie = context.Categorieen.First(c => c.Naam == "-");
+            if (!context.Producten.Any())
+            {
+                context.Add(new Product { Naam = "-", Omschrijving = "-", Categorie = dummyCategorie});
+            }
+
+            context.SaveChanges();
         }
     }
 }

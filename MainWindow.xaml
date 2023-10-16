@@ -6,29 +6,63 @@
         xmlns:local="clr-namespace:WPF_DatabaseConnection"
         mc:Ignorable="d"
         Title="Werken met data" Height="450" Width="800">
-    <StackPanel>
-        <Label FontWeight="Bold">Categorieën</Label>
-        <ListBox Name="lbCategorieen" SelectionChanged="lbCategorieen_SelectionChanged">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="200"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="{Binding Path=Naam}"/>
-                        <Label Grid.Column="1"  Content="{Binding Path=Omschrijving}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <StackPanel Orientation="Horizontal">
-            <Label FontWeight="Bold">Huidige categorie: </Label>
-            <TextBox Name="tbCategorie" Width="100" LostFocus="tbCategorie_LostFocus" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+             <Label FontWeight="Bold">Categorieën</Label>
+            <ListBox Name="lbCategorieen" SelectionChanged="lbCategorieen_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{Binding Path=Naam}"/>
+                            <Label Grid.Column="1"  Content="{Binding Path=Omschrijving}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Orientation="Horizontal">
+                <Label FontWeight="Bold">Huidige categorie: </Label>
+                <TextBox Name="tbCategorie" Width="100" LostFocus="tbCategorie_LostFocus" />
+            </StackPanel>
+            <StackPanel Name="spOmschrijving" Visibility="Hidden">
+                <Label FontWeight="Bold" Content="Omschrijving nieuwe categorie: "/>
+                <TextBox Name="tbOmschrijving" Width="250" LostFocus="tbOmschrijving_LostFocus"/>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Name="spOmschrijving" Visibility="Hidden">
-            <Label FontWeight="Bold" Content="Omschrijving nieuwe categorie: "/>
-            <TextBox Name="tbOmschrijving" Width="250" LostFocus="tbOmschrijving_LostFocus"/>
+        <StackPanel Grid.Column="1">
+            <Label FontWeight="Bold">Producten</Label>
+            <Button x:Name="btAddProduct" Width="150" Click="btAddProduct_Click" Visibility="Collapsed">Product Toevoegen</Button>
+            <ListBox Name="lbProducten">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{Binding Path=Naam}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Name="spProduct" Visibility="Hidden">
+                <StackPanel Orientation="Horizontal">
+                    <Label FontWeight="Bold">Naam product:</Label>
+                    <TextBox Name="tbProductNaam" Width="100"  />
+                </StackPanel>
+                <StackPanel >
+                    <Label FontWeight="Bold" Content="Omschrijving product: "/>
+                    <TextBox Name="tbProductOmschrijving" Width="250" />
+                </StackPanel>
+                <Button Name="btBewaarProduct" Width="200" Content="Bewaar Product" Click="btBewaarProduct_Click"/>
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Window>
