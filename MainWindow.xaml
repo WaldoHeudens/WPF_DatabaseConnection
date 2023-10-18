@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:WPF_DatabaseConnection"
         mc:Ignorable="d"
         Title="Werken met data" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="grMain">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
@@ -38,8 +42,8 @@
         </StackPanel>
         <StackPanel Grid.Column="1">
             <Label FontWeight="Bold">Producten</Label>
-            <Button x:Name="btAddProduct" Width="150" Click="btAddProduct_Click" Visibility="Collapsed">Product Toevoegen</Button>
-            <ListBox Name="lbProducten">
+            <Button x:Name="btAddProduct" Width="150" Click="btAddProduct_Click"  MouseEnter="btAddProduct_MouseEnter"  MouseLeave="DeleteMessage" Visibility="Collapsed">Product Toevoegen</Button>
+            <ListBox Name="lbProducten" SelectionChanged="lbProducten_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -54,15 +58,20 @@
             </ListBox>
             <StackPanel Name="spProduct" Visibility="Hidden">
                 <StackPanel Orientation="Horizontal">
-                    <Label FontWeight="Bold">Naam product:</Label>
-                    <TextBox Name="tbProductNaam" Width="100"  />
+                    <Label FontWeight="Bold" Width="150">Naam product:</Label>
+                    <TextBox Name="tbProductNaam" Width="100" MouseEnter="VerplichtVeld"  MouseLeave="DeleteMessage"/>
                 </StackPanel>
-                <StackPanel >
-                    <Label FontWeight="Bold" Content="Omschrijving product: "/>
-                    <TextBox Name="tbProductOmschrijving" Width="250" />
+                <StackPanel Orientation="Horizontal">
+                    <Label FontWeight="Bold" Width="150" Content="Omschrijving product: "/>
+                    <TextBox Name="tbProductOmschrijving" Width="250" MouseEnter="VerplichtVeld"  MouseLeave="DeleteMessage"/>
                 </StackPanel>
-                <Button Name="btBewaarProduct" Width="200" Content="Bewaar Product" Click="btBewaarProduct_Click"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label FontWeight="Bold" Width="150" Content="Initiele prijs: "/>
+                    <TextBox Name="tbPrijs" Width="250" MouseEnter="tbPrijs_MouseEnter" MouseLeave="DeleteMessage"/>
+                </StackPanel>
+                <Button Name="btBewaarProduct" Width="200" Content="Bewaar Product" Click="btBewaarProduct_Click" MouseEnter="btBewaarProduct_MouseEnter" MouseLeave="DeleteMessage"/>
             </StackPanel>
         </StackPanel>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" FontWeight="Bold" Height ="30" Name="tbMessage" TextAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>

@@ -12,6 +12,7 @@ namespace WPF_DatabaseConnection
     {
         public DbSet<Categorie> Categorieen { get; set; }
         public DbSet<Product> Producten { get; set; }
+        public DbSet<Prijs> Prijzen { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
