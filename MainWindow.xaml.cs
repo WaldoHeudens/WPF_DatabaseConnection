@@ -158,7 +158,7 @@ namespace WPF_DatabaseConnection
 
         public void btBewaarProduct_MouseEnter(object sender, MouseEventArgs e)
         {
-            ShowMessage("Bewaar alle wijzigingen die je hebt aangebracht, false");
+            ShowMessage("Bewaar alle wijzigingen die je hebt aangebracht", false);
         }
 
         public void DeleteMessage(object sender, MouseEventArgs e)
