@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Werken met data" Height="450" Width="800">
     <Grid x:Name="grMain">
-        <Grid.RowDefinitions>
+         <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
@@ -15,8 +16,17 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-             <Label FontWeight="Bold">Categorieën</Label>
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="Bestand">
+                <MenuItem Header="Afsluiten">
+                            
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help!">
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Label FontWeight="Bold">Categorieën</Label>
             <ListBox Name="lbCategorieen" SelectionChanged="lbCategorieen_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -40,81 +50,98 @@
                 <TextBox Name="tbOmschrijving" Width="250" LostFocus="tbOmschrijving_LostFocus"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Column="1">
-            <Label FontWeight="Bold">Producten</Label>
-            <Button x:Name="btAddProduct" Width="150" Click="btAddProduct_Click"  MouseEnter="btAddProduct_MouseEnter"  MouseLeave="DeleteMessage" Visibility="Collapsed">Product Toevoegen</Button>
-            <ListBox Name="lbProducten" SelectionChanged="lbProducten_SelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="200"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Content="{Binding Path=Naam}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <StackPanel Name="spProduct" Visibility="Hidden">
-                <StackPanel Orientation="Horizontal">
-                    <Label FontWeight="Bold" Width="150">Naam product:</Label>
-                    <TextBox Name="tbProductNaam" Width="100" MouseEnter="VerplichtVeld"  MouseLeave="DeleteMessage"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label FontWeight="Bold" Width="150" Content="Omschrijving product: "/>
-                    <TextBox Name="tbProductOmschrijving" Width="250" MouseEnter="VerplichtVeld"  MouseLeave="DeleteMessage"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label FontWeight="Bold" Width="150" Content="Initiele prijs: "/>
-                    <TextBox Name="tbPrijs" Width="250" MouseEnter="tbPrijs_MouseEnter" MouseLeave="DeleteMessage"/>
-                </StackPanel>
-                <Button Name="btBewaarProduct" Width="200" Content="Bewaar Product" Click="btBewaarProduct_Click" MouseEnter="btBewaarProduct_MouseEnter" MouseLeave="DeleteMessage"/>
-            </StackPanel>
-            <Button Name="btShowCase" Click="btShowCase_Click">Toon de prijzen per cat</Button>
-            <ScrollViewer Height="200">
-                <ListBox Name="lbLinq" Visibility="Collapsed">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="{Binding Path=Naam}"/>
-                                    <Label Content="{Binding Path=ProductNaam}"/>
-                                    <Label Content="{Binding Path=Bedrag}"/>
-                                    <Label Content="{Binding Path=Vanaf}"/>
-                                </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </ScrollViewer>
-            <ListBox Name="lbShowCase" Visibility="Collapsed">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Label Content="{Binding Path=Naam}"/>
-                            <ListBox ItemsSource="{Binding Path=Producten}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <Label Padding="25,0,0,0" Content="{Binding Path=Naam}"/>
-                                            <ListBox ItemsSource="{Binding Path=Prijzen}">
-                                                <ListBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <StackPanel>
-                                                            <Label Padding="25,0,0,0" Content="{Binding Path=Vanaf}"/>
-                                                            <Label Padding="15,0,0,0" Content="{Binding Path=Bedrag}"/>
-                                                        </StackPanel>
-                                                    </DataTemplate>
-                                                </ListBox.ItemTemplate>
-                                            </ListBox>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TabControl >
+                <TabItem Header="Producten">
+                    <Grid Background="#FFE5E5E5">
+                        <ListBox Name="lbProducten" SelectionChanged="lbProducten_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="200"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="{Binding Path=Naam}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel Name="spProduct" >
+                            <StackPanel.ContextMenu>
+                                <ContextMenu>
+                                    <TextBlock Text="Dit is een beetje nonsense die verschijnt als ik rechtsklik"/>
+                                </ContextMenu>
+                            </StackPanel.ContextMenu>
+                            <Label FontWeight="Bold">Producten</Label>
+                            <Button x:Name="btAddProduct" Width="150" Click="btAddProduct_Click"  MouseEnter="btAddProduct_MouseEnter"  MouseLeave="DeleteMessage" Visibility="Collapsed">Product Toevoegen</Button>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontWeight="Bold" Width="150">Naam product:</Label>
+                                <TextBox Name="tbProductNaam" Width="100" MouseEnter="VerplichtVeld"  MouseLeave="DeleteMessage"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontWeight="Bold" Width="150" Content="Omschrijving product: "/>
+                                <TextBox Name="tbProductOmschrijving" Width="250" MouseEnter="VerplichtVeld"  MouseLeave="DeleteMessage"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontWeight="Bold" Width="150" Content="Initiele prijs: "/>
+                                <TextBox Name="tbPrijs" Width="250" MouseEnter="tbPrijs_MouseEnter" MouseLeave="DeleteMessage"/>
+                            </StackPanel>
+                            <Button Name="btBewaarProduct" Width="200" Content="Bewaar Product" Click="btBewaarProduct_Click" MouseEnter="btBewaarProduct_MouseEnter" MouseLeave="DeleteMessage"/>
                         </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" FontWeight="Bold" Height ="30" Name="tbMessage" TextAlignment="Center" VerticalAlignment="Center"/>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="EF-Search" GotFocus="TabItem_GotFocus">
+                    <ListBox Name="lbShowCase">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Label Content="{Binding Path=Naam}"/>
+                                    <ListBox ItemsSource="{Binding Path=Producten}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <Label Padding="25,0,0,0" Content="{Binding Path=Naam}"/>
+                                                    <ListBox ItemsSource="{Binding Path=Prijzen}">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel>
+                                                                    <Label Padding="25,0,0,0" Content="{Binding Path=Vanaf}"/>
+                                                                    <Label Padding="15,0,0,0" Content="{Binding Path=Bedrag}"/>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </TabItem>
+                <TabItem Header="Linq-Search" GotFocus="TabItem_GotFocus_1">
+                    <ScrollViewer Height="200">
+                        <ListBox Name="lbLinq" Visibility="Collapsed">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{Binding Path=Naam}"/>
+                                        <Label Content="{Binding Path=ProductNaam}"/>
+                                        <Label Content="{Binding Path=Bedrag}"/>
+                                        <Label Content="{Binding Path=Vanaf}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+
+            <!--<Button Name="btShowCase" Click="btShowCase_Click">Toon de prijzen per cat</Button>-->
+         </StackPanel>
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" FontWeight="Bold" Height ="30" Name="tbMessage" TextAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>

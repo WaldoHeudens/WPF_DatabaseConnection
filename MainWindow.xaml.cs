@@ -134,7 +134,7 @@ namespace WPF_DatabaseConnection
         {
             // onthoud het gekozen product in "selectedProduct" en update de productvelden in de Xaml
 
-            selectedProduct = (Product) lbProducten.SelectedItem;
+            selectedProduct = (Product)lbProducten.SelectedItem;
             spProduct.Visibility = Visibility.Visible;
             tbProductNaam.Text = selectedProduct.Naam;
             tbProductOmschrijving.Text = selectedProduct.Omschrijving;
@@ -194,13 +194,13 @@ namespace WPF_DatabaseConnection
             }
             else
             {
-                
+
                 DateTime startTijd = DateTime.Now.AddMonths(-1);
                 List<Categorie> categorien = context.Categorieen
-                                                    .Where (c => c.Naam != "-")
-                                                    .Include(c=>c.Producten)
-                                                    .ThenInclude(p=>p.Prijzen
-                                                        .Where(prijs=>prijs.Vanaf > startTijd))
+                                                    .Where(c => c.Naam != "-")
+                                                    .Include(c => c.Producten)
+                                                    .ThenInclude(p => p.Prijzen
+                                                        .Where(prijs => prijs.Vanaf > startTijd))
                                                     .ToList();
                 List<Categorie> categorien2 = categorien.Where(c => c.Producten.Any()).ToList();
 
@@ -211,24 +211,65 @@ namespace WPF_DatabaseConnection
                 // Met Linq om alleen de gebruikte velden op the halen
 
                 var categorieQuerry = from categorie in context.Categorieen
-                             from product in categorie.Producten
-                             from prijs in context.Prijzen
-                             where categorie.Naam != "-"
-                                && product.Naam != "-"
-                                && product.CategorieId == categorie.Id 
-                                && prijs.ProductId == product.Id 
-                                && prijs.Vanaf > startTijd
-                             select new
-                             {
-                                 Naam = categorie.Naam,
-                                 ProductNaam = product.Naam,
-                                 Bedrag = prijs.Bedrag,
-                                 Vanaf = prijs.Vanaf
-                             };
+                                      from product in context.Producten
+                                      from prijs in context.Prijzen
+                                      where categorie.Naam != "-"
+                                         && product.Naam != "-"
+                                         && product.CategorieId == categorie.Id
+                                         && prijs.ProductId == product.Id
+                                         && prijs.Vanaf > startTijd
+                                      select new
+                                      {
+                                          Naam = categorie.Naam,
+                                          ProductNaam = product.Naam,
+                                          Bedrag = prijs.Bedrag,
+                                          Vanaf = prijs.Vanaf
+                                      };
                 lbLinq.ItemsSource = categorieQuerry.ToList();
                 lbLinq.Visibility = Visibility.Visible;
 
             }
+        }
+
+ 
+        private void TabItem_GotFocus(object sender, RoutedEventArgs e)
+        {
+            DateTime startTijd = DateTime.Now.AddMonths(-1);
+            List<Categorie> categorien = context.Categorieen
+                                                .Where(c => c.Naam != "-")
+                                                .Include(c => c.Producten)
+                                                .ThenInclude(p => p.Prijzen
+                                                    .Where(prijs => prijs.Vanaf > startTijd))
+                                                .ToList();
+            List<Categorie> categorien2 = categorien.Where(c => c.Producten.Any()).ToList();
+
+            lbShowCase.ItemsSource = categorien2;
+
+        }
+
+        private void TabItem_GotFocus_1(object sender, RoutedEventArgs e)
+        {
+            // Met Linq om alleen de gebruikte velden op the halen
+
+            DateTime startTijd = DateTime.Now.AddMonths(-1);
+            var categorieQuerry = from categorie in context.Categorieen
+                                  from product in context.Producten
+                                  from prijs in context.Prijzen
+                                  where categorie.Naam != "-"
+                                     && product.Naam != "-"
+                                     && product.CategorieId == categorie.Id
+                                     && prijs.ProductId == product.Id
+                                     && prijs.Vanaf > startTijd
+                                  select new
+                                  {
+                                      Naam = categorie.Naam,
+                                      ProductNaam = product.Naam,
+                                      Bedrag = prijs.Bedrag,
+                                      Vanaf = prijs.Vanaf
+                                  };
+            lbLinq.ItemsSource = categorieQuerry.ToList();
+            lbLinq.Visibility = Visibility.Visible;
+
         }
     }
 }
