@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF_DatabaseConnection.Data;
+using WPF_DatabaseConnection.Migrations;
 using WPF_DatabaseConnection.Models;
 
 namespace WPF_DatabaseConnection
@@ -184,5 +185,50 @@ namespace WPF_DatabaseConnection
             tbMessage.Visibility = Visibility.Visible;
         }
 
+        private void btShowCase_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbShowCase.Visibility == Visibility.Visible)
+            {
+                lbShowCase.Visibility = Visibility.Hidden;
+                lbLinq.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                
+                DateTime startTijd = DateTime.Now.AddMonths(-1);
+                List<Categorie> categorien = context.Categorieen
+                                                    .Where (c => c.Naam != "-")
+                                                    .Include(c=>c.Producten)
+                                                    .ThenInclude(p=>p.Prijzen
+                                                        .Where(prijs=>prijs.Vanaf > startTijd))
+                                                    .ToList();
+                List<Categorie> categorien2 = categorien.Where(c => c.Producten.Any()).ToList();
+
+                lbShowCase.ItemsSource = categorien2;
+                lbShowCase.Visibility = Visibility.Visible;
+
+
+                // Met Linq om alleen de gebruikte velden op the halen
+
+                var categorieQuerry = from categorie in context.Categorieen
+                             from product in categorie.Producten
+                             from prijs in context.Prijzen
+                             where categorie.Naam != "-"
+                                && product.Naam != "-"
+                                && product.CategorieId == categorie.Id 
+                                && prijs.ProductId == product.Id 
+                                && prijs.Vanaf > startTijd
+                             select new
+                             {
+                                 Naam = categorie.Naam,
+                                 ProductNaam = product.Naam,
+                                 Bedrag = prijs.Bedrag,
+                                 Vanaf = prijs.Vanaf
+                             };
+                lbLinq.ItemsSource = categorieQuerry.ToList();
+                lbLinq.Visibility = Visibility.Visible;
+
+            }
+        }
     }
 }

@@ -71,6 +71,49 @@
                 </StackPanel>
                 <Button Name="btBewaarProduct" Width="200" Content="Bewaar Product" Click="btBewaarProduct_Click" MouseEnter="btBewaarProduct_MouseEnter" MouseLeave="DeleteMessage"/>
             </StackPanel>
+            <Button Name="btShowCase" Click="btShowCase_Click">Toon de prijzen per cat</Button>
+            <ScrollViewer Height="200">
+                <ListBox Name="lbLinq" Visibility="Collapsed">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Path=Naam}"/>
+                                    <Label Content="{Binding Path=ProductNaam}"/>
+                                    <Label Content="{Binding Path=Bedrag}"/>
+                                    <Label Content="{Binding Path=Vanaf}"/>
+                                </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+            <ListBox Name="lbShowCase" Visibility="Collapsed">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Label Content="{Binding Path=Naam}"/>
+                            <ListBox ItemsSource="{Binding Path=Producten}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Label Padding="25,0,0,0" Content="{Binding Path=Naam}"/>
+                                            <ListBox ItemsSource="{Binding Path=Prijzen}">
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel>
+                                                            <Label Padding="25,0,0,0" Content="{Binding Path=Vanaf}"/>
+                                                            <Label Padding="15,0,0,0" Content="{Binding Path=Bedrag}"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
         <TextBlock Grid.Row="1" Grid.ColumnSpan="2" FontWeight="Bold" Height ="30" Name="tbMessage" TextAlignment="Center" VerticalAlignment="Center"/>
     </Grid>

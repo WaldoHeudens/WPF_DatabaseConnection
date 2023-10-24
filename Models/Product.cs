@@ -23,13 +23,14 @@ namespace WPF_DatabaseConnection.Models
         public string Omschrijving { get; set; }
 
         [Required]
-        [ForeignKey ("Categorieen")]
-        public int CategorieId { get; set; }
-
-        [Required]
         [DataType (DataType.Date)]
         public DateTime Gecreeerd { get; set; } = DateTime.Now;
 
         public Categorie? Categorie { get; set; }
+        [ForeignKey ("Categorieen")]
+        public int CategorieId { get; set; }
+
+
+        public List<Prijs>? Prijzen { get; set; }
     }
 }

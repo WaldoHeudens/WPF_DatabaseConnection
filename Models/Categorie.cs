@@ -11,5 +11,8 @@ namespace WPF_DatabaseConnection.Models
         public int Id { get; set; }
         public string Naam { get; set; } = "";
         public string Omschrijving { get; set; } = "";
+
+        
+        public List<Product>? Producten { get; set; }
     }
 }
