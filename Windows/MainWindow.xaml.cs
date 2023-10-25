@@ -279,5 +279,19 @@ namespace WPF_DatabaseConnection
         {
             new Registratie().Show();
         }
+
+        private void miAfmelden_Click(object sender, RoutedEventArgs e)
+        {
+            App.gebruiker = null;
+            miAangemeld.Visibility = Visibility.Collapsed;
+            miAfmelden.Visibility = Visibility.Collapsed;
+            miRegistreren.Visibility = Visibility.Visible;
+            miLogin.Visibility = Visibility.Visible;
+        }
+
+        private void miLogin_Click(object sender, RoutedEventArgs e)
+        {
+            new Login().Show();
+        }
     }
 }

@@ -24,7 +24,10 @@
             </MenuItem>
             <MenuItem Header="Help!">
             </MenuItem>
-            <MenuItem Header="Registeren" Click="MenuItem_Click"/>
+            <MenuItem Name="miLogin" Header="Login" Click="miLogin_Click"/>
+            <MenuItem Name="miRegistreren" Header="Registeren" Click="MenuItem_Click"/>
+            <MenuItem Name="miAangemeld" Visibility="Collapsed"/>
+            <MenuItem Name="miAfmelden" Header="Afmelden" Click="miAfmelden_Click" Visibility="Collapsed"/>
         </Menu>
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Label FontWeight="Bold">Categorieën</Label>
