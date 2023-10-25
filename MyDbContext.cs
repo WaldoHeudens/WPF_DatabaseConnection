@@ -11,8 +11,9 @@ namespace WPF_DatabaseConnection
     internal class MyDbContext:DbContext
     {
         public DbSet<Categorie> Categorieen { get; set; }
-        public DbSet<Product> Producten { get; set; }
+        public DbSet<Gebruiker> Gebruikers { get; set; }
         public DbSet<Prijs> Prijzen { get; set; }
+        public DbSet<Product> Producten { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

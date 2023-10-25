@@ -24,6 +24,7 @@
             </MenuItem>
             <MenuItem Header="Help!">
             </MenuItem>
+            <MenuItem Header="Registeren" Click="MenuItem_Click"/>
         </Menu>
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Label FontWeight="Bold">Categorieën</Label>

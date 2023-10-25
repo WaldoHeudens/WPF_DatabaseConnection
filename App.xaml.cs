@@ -11,7 +11,12 @@ namespace WPF_DatabaseConnection
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+    /// 
+
+
     public partial class App : Application
     {
+        internal static MyDbContext context = null;
+        internal static MainWindow mainWindow = null;
     }
 }

@@ -1,0 +1,71 @@
+﻿<Window x:Class="WPF_DatabaseConnection.Registratie"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_DatabaseConnection"
+        mc:Ignorable="d"
+        Title="Registratie" Height="300" Width="440">
+    <Window.Resources>
+        <Style x:Key="stButton" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="Gray" Offset="0.1"/>
+                        <GradientStop Color="White" Offset="0.5"/>
+                        <GradientStop Color="Gray" Offset="0.9"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="200"/>
+        </Style>
+        <Style x:Key="stTextBlock" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Padding" Value="0,6,15,0"/>
+        </Style>
+        <Style x:Key="stTextBox" TargetType="TextBox">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="200"/>
+        </Style>
+        <Style x:Key="stPasswordBox" TargetType="PasswordBox">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="200"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Style="{StaticResource stTextBlock}" FontSize="18" HorizontalAlignment="Center" Grid.ColumnSpan="2" Text="Registreren Gebruiker"/>
+        <TextBlock Style="{StaticResource stTextBlock}" Grid.Row="1" Text="Naam"/>
+        <TextBlock Style="{StaticResource stTextBlock}" Grid.Row="2" Text="Email"/>
+        <TextBlock Style="{StaticResource stTextBlock}" Grid.Row="3" Text="Wachtwoord"/>
+        <TextBlock Style="{StaticResource stTextBlock}" Grid.Row="4" Text="Herhaal wachtwoord"/>
+        <TextBlock Style="{StaticResource stTextBlock}" Name="tbMededeling" Grid.Row="6" Grid.ColumnSpan="2" Visibility="Hidden" Width="350" HorizontalAlignment="Left" Height="30" Background="Red"/>
+        <TextBox Style="{StaticResource stTextBox}" Name="tbNaam" Grid.Row="1" Grid.Column="1"/>
+        <TextBox Style="{StaticResource stTextBox}" Name="tbGebruiker" Grid.Row="2" Grid.Column="1"/>
+        <PasswordBox Style="{StaticResource stPasswordBox}" Name="pwWachtwoord" Grid.Row="3" Grid.Column="1"/>
+        <PasswordBox Style="{StaticResource stPasswordBox}" Name="pwHerhaling" Grid.Row="4" Grid.Column="1"/>
+        <Button Style="{StaticResource stButton}" Name="btRegistreren" Grid.Row="5" Grid.ColumnSpan="2" Content="Registreren" Click="btRegistreren_Click"/>
+    </Grid>
+</Window>

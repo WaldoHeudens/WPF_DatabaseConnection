@@ -39,6 +39,9 @@ namespace WPF_DatabaseConnection
 
             categorieen = context.Categorieen.Where(c => c.Naam != "-").ToList();
             lbCategorieen.ItemsSource = categorieen;
+
+            App.mainWindow = this;
+            App.context = context;
         }
 
         private void lbCategorieen_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -270,6 +273,11 @@ namespace WPF_DatabaseConnection
             lbLinq.ItemsSource = categorieQuerry.ToList();
             lbLinq.Visibility = Visibility.Visible;
 
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            new Registratie().Show();
         }
     }
 }

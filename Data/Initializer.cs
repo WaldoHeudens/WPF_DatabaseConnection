@@ -12,6 +12,16 @@ namespace WPF_DatabaseConnection.Data
     {
         internal static void DbSetInitializer(MyDbContext context)
         {
+            Gebruiker dummy = null;
+            if (!context.Gebruikers.Any())
+            {
+                dummy = new Gebruiker {Naam ="-", Gebruikersnaam = "-", Wachtwoord="!**Zever!" };
+                context.Add(dummy);
+                context.SaveChanges();
+            }
+
+            if (dummy == null)
+                dummy = context.Gebruikers.First(g => g.Naam == "-");
 
             if (!context.Categorieen.Any())
             {
